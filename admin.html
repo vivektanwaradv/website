@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin</title>
+<meta name="description" content="Admin">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<meta name="robots" content="noindex,nofollow">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"><script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+</head>
+<body data-page="admin" class="bg-slate-100 min-h-screen text-slate-800">
+
+<!-- LOGIN -->
+<div id="login" class="min-h-screen flex items-center justify-center p-4">
+  <form onsubmit="doLogin(event)" class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-1"><i class="fas fa-lock text-amber-500 mr-2"></i>Admin Login</h1>
+    <p id="login-msg" class="text-sm text-gray-500 mb-6">Authorised access only.</p>
+    <input id="em" type="email" placeholder="Admin email" class="w-full px-3 py-2 border rounded-lg mb-4" required>
+    <input id="pw" type="password" placeholder="Password" class="w-full px-3 py-2 border rounded-lg mb-6" required>
+    <button class="w-full bg-blue-900 text-white font-bold py-3 rounded-lg hover:bg-blue-800">Login</button>
+    <a href="about.html" class="block text-center text-sm text-gray-400 mt-4">← Back to website</a>
+  </form>
+</div>
+
+<!-- DASHBOARD -->
+<div id="panel" class="hidden h-screen flex flex-col">
+  <header class="bg-slate-900 text-white px-4 py-3 flex flex-wrap items-center gap-3">
+    <b class="mr-2"><i class="fas fa-balance-scale text-amber-500 mr-2"></i>Site Admin</b>
+    <nav class="flex gap-1 text-sm" id="tabs">
+      <button data-t="pages" class="px-3 py-1 rounded">Edit Pages</button><button data-t="blogs" class="px-3 py-1 rounded">Blogs</button>
+      <button data-t="docs" class="px-3 py-1 rounded">Documents</button><button data-t="team" class="px-3 py-1 rounded">Team</button></nav>
+    <span id="status" class="ml-auto text-xs text-slate-300"></span>
+    <a href="index.html" target="_blank" class="text-xs bg-white/20 px-3 py-1 rounded">View site</a>
+    <button onclick="auth.signOut()" class="text-xs bg-white/20 px-3 py-1 rounded">Logout</button>
+  </header>
+
+  <!-- EDIT PAGES: the real page opens in edit mode, click any text to type -->
+  <section id="t-pages" class="flex-1 flex flex-col min-h-0">
+    <div class="bg-white border-b px-4 py-2 flex flex-wrap items-center gap-1 text-sm" onmousedown="if(event.target.tagName!=='SELECT')event.preventDefault()">
+      <select id="pg" onchange="$('frame').src=this.value+'?edit=1'" class="border rounded px-2 py-1 mr-2">
+        <option value="index.html">Home</option><option value="about.html">About</option><option value="blogs.html">Blogs</option><option value="contact.html">Contact</option></select>
+      <button class="tb font-bold" onclick="cmd('bold')">B</button><button class="tb italic" onclick="cmd('italic')">I</button><button class="tb underline" onclick="cmd('underline')">U</button>
+      <button class="tb" onclick="size(-1)">A−</button><button class="tb" onclick="size(1)">A+</button>
+      <button class="tb" onclick="cmd('justifyLeft')"><i class="fas fa-align-left"></i></button><button class="tb" onclick="cmd('justifyCenter')"><i class="fas fa-align-center"></i></button><button class="tb" onclick="cmd('justifyRight')"><i class="fas fa-align-right"></i></button>
+      <label class="tb cursor-pointer" title="Text colour">A <input type="color" class="w-5 h-5 align-middle" value="#b45309" oninput="cmd('foreColor',this.value)"></label>
+      <button class="tb" onclick="link()"><i class="fas fa-link"></i></button><button class="tb" onclick="cmd('unlink')"><i class="fas fa-unlink"></i></button><button class="tb" onclick="cmd('removeFormat')">Clear</button>
+      <button class="tb bg-amber-500 ml-auto font-semibold" onclick="$('frame').contentWindow.saveTexts()">Save now</button>
+    </div>
+    <p class="text-xs text-gray-500 px-4 py-1 bg-amber-50">Click any text on the page and type. Changes save automatically. Use the camera buttons to change photos. Use the tabs above for blogs, documents and team.</p>
+    <iframe id="frame" class="flex-1 w-full bg-white" title="Page editor"></iframe>
+  </section>
+
+  <!-- BLOGS -->
+  <section id="t-blogs" class="hidden flex-1 overflow-auto p-4"><div class="max-w-4xl mx-auto">
+    <div class="bg-white p-6 rounded-xl shadow mb-6"><h2 class="font-bold text-xl mb-3">Add Blog Post</h2>
+      <input id="b-title" placeholder="Blog title" class="w-full p-3 border rounded-lg mb-3">
+      <label class="inline-block mb-3 text-sm cursor-pointer bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-semibold"><i class="fas fa-image mr-1"></i> Cover image (optional)<input type="file" accept="image/*" class="hidden" onchange="pickCover(this)"></label> <span id="cover-name" class="text-xs text-gray-500"></span>
+      <div id="b-editor" style="height:240px;background:#fff"></div>
+      <button onclick="addBlog()" class="mt-4 bg-blue-900 text-white px-6 py-3 rounded-lg font-semibold">Publish Post</button></div>
+    <div id="b-list" class="space-y-3"></div></div></section>
+
+  <!-- DOCUMENTS -->
+  <section id="t-docs" class="hidden flex-1 overflow-auto p-4"><div class="max-w-4xl mx-auto">
+    <div class="bg-white p-6 rounded-xl shadow mb-6"><h2 class="font-bold text-xl mb-3">Upload Document</h2>
+      <div class="grid md:grid-cols-2 gap-3">
+        <input id="d-name" placeholder="Document name" class="p-3 border rounded-lg"><input id="d-price" type="number" min="0" placeholder="Price in ₹ (0 = free)" class="p-3 border rounded-lg">
+        <input id="d-file" type="file" class="p-2 border rounded-lg"><input id="d-link" type="url" placeholder="…or file link (Google Drive etc.)" class="p-3 border rounded-lg"></div>
+      <p class="text-xs text-gray-500 mt-2">Uploaded files must be under 650 KB; for bigger files paste a Google Drive link.</p>
+      <button onclick="addDoc()" class="mt-3 bg-blue-900 text-white px-6 py-2 rounded-lg">Add Document</button></div>
+    <div id="d-list" class="space-y-3"></div></div></section>
+
+  <!-- TEAM -->
+  <section id="t-team" class="hidden flex-1 overflow-auto p-4"><div class="max-w-4xl mx-auto">
+    <div class="bg-white p-6 rounded-xl shadow mb-6"><h2 class="font-bold text-xl mb-3">Add Team Member</h2>
+      <div class="flex flex-wrap gap-3"><input id="m-name" placeholder="Full name" class="p-2 border rounded-lg"><input id="m-role" placeholder="Role" class="p-2 border rounded-lg"><input id="m-photo" type="file" accept="image/*" class="p-1">
+        <button onclick="addMember()" class="bg-blue-900 text-white px-6 py-2 rounded-lg">Add</button></div></div>
+    <div id="m-list" class="grid sm:grid-cols-2 gap-4"></div></div></section>
+</div>
+<style>.tb{padding:.25rem .6rem;border-radius:.375rem;background:#f1f5f9}.tb:hover{background:#e2e8f0}#tabs .on{background:#f59e0b;color:#0f172a}</style>
+
+<script src="site.js"></script>
+<script>
+// ---------- login / access control ----------
+async function doLogin(e) {
+  e.preventDefault();
+  try { await auth.signInWithEmailAndPassword($('em').value.trim(), $('pw').value); } catch (x) { $('login-msg').textContent = 'Login failed. Check email and password.'; }
+}
+document.addEventListener('authchange', e => {
+  const { user, ok } = e.detail;
+  if (user && !ok) { auth.signOut(); $('login-msg').textContent = 'This account is not allowed here.'; return; }
+  $('login').classList.toggle('hidden', ok); $('panel').classList.toggle('hidden', !ok);
+  if (ok && !$('frame').src) $('frame').src = 'index.html?edit=1';
+});
+// ---------- tabs ----------
+function tab(t) { ['pages', 'blogs', 'docs', 'team'].forEach(x => $('t-' + x).classList.toggle('hidden', x !== t)); Q('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === t)); }
+Q('#tabs button').forEach(b => b.onclick = () => tab(b.dataset.t)); tab('pages');
+// ---------- status + page editor toolbar ----------
+window.adminStatus = s => { const m = { saving: 'Saving…', saved: '✓ All changes saved', error: '⚠ Not saved', ready: 'Editing' }; $('status').textContent = m[s] || ''; };
+$('frame').onload = () => { const f = $('frame').contentWindow.location.pathname.split('/').pop() || 'index.html'; if ([...$('pg').options].some(o => o.value === f)) $('pg').value = f; };
+let fs = 3;
+function cmd(c, v) { const w = $('frame').contentWindow; w.document.execCommand('styleWithCSS', false, true); w.document.execCommand(c, false, v); w.scheduleSave(); }
+function size(d) { fs = Math.min(7, Math.max(1, fs + d)); cmd('fontSize', fs); }
+function link() { const u = prompt('Link address (https://…)'); if (u) cmd('createLink', u); }
+// ---------- blogs ----------
+const quill = new Quill('#b-editor', { theme: 'snow', modules: { toolbar: [[{ header: [1, 2, 3, false] }], ['bold', 'italic', 'underline'], [{ color: [] }], [{ list: 'ordered' }, { list: 'bullet' }], ['link', 'image', 'video'], ['clean']] } });
+quill.getModule('toolbar').addHandler('image', () => { const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*';
+  i.onchange = async () => { if (i.files[0]) quill.insertEmbed((quill.getSelection(true) || { index: 0 }).index, 'image', await img(i.files[0], 900, 0.75)); }; i.click(); });
+let coverData = '';
+async function pickCover(inp) { if (inp.files[0]) { coverData = await img(inp.files[0], 900); $('cover-name').textContent = inp.files[0].name; } }
+async function addBlog() {
+  const t = $('b-title').value.trim(); if (!t || quill.getText().trim().length < 2) return alert('Please fill both title and content.');
+  if (!await put('blogs', { id: 'b' + Date.now().toString(36), title: t, html: clean(quill.root.innerHTML), cover: coverData, date: new Date().toISOString() })) return;
+  $('b-title').value = ''; quill.setText(''); coverData = ''; $('cover-name').textContent = ''; alert('Blog published. It is live on the Blogs page.');
+}
+// ---------- documents ----------
+function addDoc() {
+  const name = $('d-name').value.trim(), price = Math.max(0, parseInt($('d-price').value) || 0), f = $('d-file').files[0], link = $('d-link').value.trim();
+  if (!name || (!f && !link)) return alert('Enter a name and choose a file or paste a link.');
+  const push = async o => { if (await put('docs', Object.assign({ id: 'd' + Date.now().toString(36), name, price, created: Date.now() }, o))) $('d-name').value = $('d-price').value = $('d-file').value = $('d-link').value = ''; };
+  if (f) { if (f.size > 650000) return alert('File is over 650 KB. Upload it to Google Drive and paste the share link instead.'); const r = new FileReader(); r.onload = () => push({ data: r.result, fileName: f.name, size: f.size }); r.readAsDataURL(f); } else push({ link });
+}
+// ---------- team ----------
+async function addMember() {
+  const n = $('m-name').value.trim(), r = $('m-role').value.trim(), f = $('m-photo').files[0]; if (!n || !r) return alert('Please fill name and role.');
+  if (await put('team', { id: 't' + Date.now().toString(36), name: n, role: r, photo: f ? await img(f, 600) : '', order: Date.now() })) $('m-name').value = $('m-role').value = $('m-photo').value = '';
+}
+async function memberPhoto(id, inp) {
+  if (!inp.files[0]) return; const m = teamList().find(x => x.id === id), d = await img(inp.files[0], 600);
+  if (m.owner) await setSite({ photo: d }); else await put('team', Object.assign({}, m, { photo: d }));
+}
+async function memberField(id, k, v) { const m = teamList().find(x => x.id === id); if (v.trim()) await put('team', Object.assign({}, m, { [k]: v.trim() })); }
+const rm = (c, id, msg) => confirm(msg) && del(c, id);
+// ---------- lists ----------
+document.addEventListener('dbchange', () => {
+  $('b-list').innerHTML = DB.blogs.map(b => `<div class="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center gap-3"><div><b>${esc(b.title)}</b><div class="text-xs text-gray-400">${fmt(b.date)}</div></div><button onclick="rm('blogs','${b.id}','Delete this post?')" class="bg-red-500 text-white px-3 py-1 rounded">Delete</button></div>`).join('') || '<p class="text-gray-400">No posts yet.</p>';
+  $('d-list').innerHTML = DB.docs.map(d => `<div class="bg-white p-4 rounded-lg shadow-sm flex justify-between items-center gap-3"><div><b>${esc(d.name)}</b><div class="text-xs text-gray-400">${d.price ? '₹' + d.price : 'Free'}</div></div><button onclick="rm('docs','${d.id}','Delete this document?')" class="bg-red-500 text-white px-3 py-1 rounded">Delete</button></div>`).join('') || '<p class="text-gray-400">No documents yet.</p>';
+  $('m-list').innerHTML = teamList().map(m => `<div class="bg-white p-4 rounded-lg shadow-sm flex gap-3 items-center"><img src="${m.owner ? (DB.photo || AVATAR) : (m.photo || AVATAR)}" class="w-16 h-16 rounded-full object-cover">
+    <div class="flex-1 min-w-0"><input value="${esc(m.name)}" onchange="memberField('${m.id}','name',this.value)" class="w-full border-b font-bold"><input value="${esc(m.role)}" onchange="memberField('${m.id}','role',this.value)" class="w-full border-b text-sm text-amber-600"></div>
+    <label class="cursor-pointer text-blue-900" title="Change photo"><i class="fas fa-camera"></i><input type="file" accept="image/*" class="hidden" onchange="memberPhoto('${m.id}',this)"></label>
+    ${m.owner ? '' : `<button onclick="rm('team','${m.id}','Delete this member?')" class="text-red-500"><i class="fas fa-trash"></i></button>`}</div>`).join('');
+});
+</script>
+</body>
+</html>

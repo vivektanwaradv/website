@@ -1,0 +1,17 @@
+body{font-family:'Lato',sans-serif;background:#f8fafc;overflow-x:hidden}
+h1,h2,h3,h4,.serif{font-family:'Playfair Display',serif}
+html{scroll-behavior:smooth}
+.fade-in{animation:fadeIn .6s ease-out forwards;opacity:0;transform:translateY(20px)}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0)}}
+.glass-card{background:rgba(255,255,255,.95);border:1px solid rgba(255,255,255,.2);box-shadow:0 8px 32px rgba(31,38,135,.07)}
+body:not(.is-admin) .admin-only{display:none!important}
+[contenteditable=true]{outline:1px dashed #d97706;outline-offset:3px;min-height:1em;cursor:text}
+[contenteditable=true]:focus{background:#fffbeb;color:#1e293b;border-radius:4px}
+.ql-editor{min-height:150px}
+.blog-content img{max-width:100%;height:auto;margin:1rem 0;border-radius:8px}
+.blog-content video,.blog-content iframe{max-width:100%;border-radius:8px;margin:1rem 0}
+.blog-content h1{font-size:2rem;font-weight:700;margin:1rem 0}.blog-content h2{font-size:1.6rem;font-weight:700;margin:1rem 0}.blog-content h3{font-size:1.3rem;font-weight:700;margin:.8rem 0}
+.blog-content p{margin:.8rem 0}.blog-content ul{list-style:disc;padding-left:1.5rem}.blog-content ol{list-style:decimal;padding-left:1.5rem}.blog-content a{color:#1d4ed8;text-decoration:underline}
+#wa-float::before{content:"";position:absolute;inset:0;border-radius:9999px;background:#25D366;animation:waPulse 2s infinite;z-index:-1}
+@keyframes waPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
+.team-card:hover .team-img{transform:scale(1.05)}.team-img{transition:transform .3s}

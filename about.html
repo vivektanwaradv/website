@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Vivek Tanwar | Advocate</title>
+<meta name="description" content="About Vivek Tanwar, Advocate at District Court, Bhiwani, Haryana, and his legal team.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-page="about" class="text-slate-800 flex flex-col min-h-screen">
+<main class="flex-grow fade-in bg-white">
+  <div class="bg-blue-900 text-white py-16 text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10"><i class="fas fa-balance-scale text-9xl absolute -left-10 -top-10"></i><i class="fas fa-gavel text-9xl absolute -right-10 -bottom-10"></i></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4"><h1 class="text-5xl font-bold mb-4 serif" data-edit="about.title">Meet The Legal Expert</h1><p class="text-xl text-blue-200" data-edit="about.sub">Committed to excellence, integrity, and winning your case.</p></div>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 py-16"><div class="flex flex-col md:flex-row items-start gap-12">
+    <div class="w-full md:w-1/2">
+      <h3 class="text-3xl font-bold text-slate-900 mb-6" data-edit="about.h" data-legacy="13">A Decade of Advocacy</h3>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6" data-edit="about.p1" data-legacy="14">Starting from the basics of law to mastering complex litigation, every step in my career has been driven by a passion for justice. I believe in understanding the human side of every case, not just the legal clauses.</p>
+      <p class="text-gray-600 text-lg leading-relaxed" data-edit="about.p2" data-legacy="15">Whether it's a property dispute or a criminal appeal, I bring the same level of dedication and scrutiny to ensure the best outcome for my clients.</p>
+    </div>
+    <div class="w-full md:w-1/2"><div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 shadow-sm">
+      <h4 class="text-xl font-bold text-blue-900 mb-4" data-edit="about.values" data-legacy="16">Core Values</h4>
+      <ul class="space-y-3 text-gray-700">
+        <li><i class="fas fa-check-circle text-green-500 mr-3"></i><span data-edit="about.v1">Client-Centric Approach</span></li>
+        <li><i class="fas fa-check-circle text-green-500 mr-3"></i><span data-edit="about.v2">Transparent Communication</span></li>
+        <li><i class="fas fa-check-circle text-green-500 mr-3"></i><span data-edit="about.v3">Strategic Litigation</span></li>
+      </ul></div></div>
+  </div></div>
+  <div class="bg-slate-50 py-16"><div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12"><h2 class="text-3xl font-bold text-blue-900 mb-4 serif" data-edit="about.teamTitle">Our Legal Team</h2><p class="text-gray-500" data-edit="about.teamSub">Work together to achieve justice.</p></div>
+    <div id="team-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  </div></div>
+</main>
+<script src="site.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivek Tanwar | Advocate, Bhiwani</title>
+<meta name="description" content="Vivek Tanwar, Advocate at District Court, Bhiwani, Haryana. Civil, Criminal, Revenue and Consumer law. Legal articles, documents and consultation.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<meta property="og:title" content="Vivek Tanwar | Advocate, Bhiwani"><meta property="og:type" content="website">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Attorney","name":"Vivek Tanwar, Advocate","telephone":"+91-9671755613","email":"vivektanwaradv@gmail.com","address":{"@type":"PostalAddress","streetAddress":"New Litigation Hall, District Courts Complex","addressLocality":"Bhiwani","addressRegion":"Haryana","addressCountry":"IN"}}</script>
+</head>
+<body data-page="home" class="text-slate-800 flex flex-col min-h-screen">
+<main class="flex-grow fade-in">
+  <div class="relative bg-slate-900 text-white py-24 lg:py-40 overflow-hidden">
+    <div class="absolute inset-0"><img id="hero-bg-img" src="" alt="" class="w-full h-full object-cover opacity-30"><div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div></div>
+    <label class="admin-only absolute top-4 right-4 z-20 bg-white text-blue-900 px-3 py-2 rounded-lg shadow cursor-pointer text-sm font-semibold"><i class="fas fa-image mr-1"></i> Change background<input type="file" accept="image/*" class="hidden" onchange="changeHero(this)"></label>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      <div class="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-8">
+        <img src="" alt="Vivek Tanwar, Advocate" class="profile-img w-full h-full rounded-full object-cover border-4 border-amber-500 shadow-2xl ring-4 ring-white/10">
+        <label class="admin-only absolute bottom-1 right-1 bg-white w-9 h-9 flex items-center justify-center rounded-full shadow cursor-pointer" title="Change photo"><i class="fas fa-camera text-blue-900"></i><input type="file" accept="image/*" onchange="changeProfile(this)" class="hidden"></label>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight" data-edit="home.heroTitle" data-legacy="0">Justice, Integrity, Results</h1>
+      <p class="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto" data-edit="home.heroText" data-legacy="1">Dedicated legal representation at District Court, Bhiwani.<br>Specializing in Civil, Criminal, Revenue, and Consumer Law.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="contact.html" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 px-8 rounded-lg transition shadow-lg"><i class="fas fa-phone-alt mr-2"></i> Consult Now</a>
+        <a href="about.html" class="border-2 border-white/30 hover:border-white hover:bg-white/10 text-white font-bold py-4 px-8 rounded-lg transition">View Profile</a>
+      </div>
+      <form onsubmit="event.preventDefault();globalSearch()" class="max-w-xl mx-auto mt-10 flex">
+        <input id="home-search" type="search" placeholder="Search blogs, documents, practice areas…" class="flex-1 min-w-0 px-4 py-3 rounded-l-lg text-slate-800 outline-none">
+        <button class="bg-amber-600 hover:bg-amber-700 px-5 rounded-r-lg font-bold"><i class="fas fa-search mr-1"></i> Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="py-16 bg-white"><div class="max-w-6xl mx-auto px-4"><div class="flex flex-col md:flex-row items-center gap-12">
+    <div class="w-full md:w-1/3 relative"><div class="rounded-2xl overflow-hidden shadow-2xl aspect-[3/4] bg-gray-200"><img src="" alt="Vivek Tanwar" class="profile-img w-full h-full object-cover"></div></div>
+    <div class="w-full md:w-2/3">
+      <h2 class="text-3xl font-bold text-blue-900 mb-6 border-l-4 border-amber-500 pl-4" data-edit="home.aboutTitle" data-legacy="2">Dedicated to Your Rights</h2>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6" data-edit="home.aboutText" data-legacy="3">With a robust academic foundation and practical courtroom experience, I provide strategic legal solutions tailored to your unique needs. My approach combines thorough research with aggressive advocacy to secure the best possible outcome for my clients.</p>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100"><h4 class="font-bold text-blue-900 mb-1" data-edit="home.degree1" data-legacy="4">LL.M. (Criminal Law)</h4><p class="text-sm text-gray-500" data-edit="home.degree1s">Post Graduate Specialization</p></div>
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100"><h4 class="font-bold text-blue-900 mb-1" data-edit="home.degree2">NET Qualified</h4><p class="text-sm text-gray-500" data-edit="home.degree2s">National Eligibility Test</p></div>
+      </div></div></div></div></div>
+
+  <div class="py-16 bg-slate-50"><div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16"><h2 class="text-3xl font-bold text-slate-900 mb-4" data-edit="home.areasTitle">Practice Areas</h2><div class="w-20 h-1 bg-amber-500 mx-auto rounded-full"></div></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-slate-100 group">
+        <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-900 transition"><i class="fas fa-gavel text-blue-900 text-2xl group-hover:text-white transition"></i></div>
+        <h3 class="text-xl font-bold mb-3" data-edit="home.area1t" data-legacy="5">Civil Disputes</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-edit="home.area1d" data-legacy="6">Property disputes, contracts, recovery suits, and civil litigation.</p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-slate-100 group">
+        <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-900 transition"><i class="fas fa-user-shield text-blue-900 text-2xl group-hover:text-white transition"></i></div>
+        <h3 class="text-xl font-bold mb-3" data-edit="home.area2t" data-legacy="7">Criminal Law</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-edit="home.area2d" data-legacy="8">Bail applications, trial defense, appeals, and FIR registration.</p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-slate-100 group">
+        <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-900 transition"><i class="fas fa-landmark text-blue-900 text-2xl group-hover:text-white transition"></i></div>
+        <h3 class="text-xl font-bold mb-3" data-edit="home.area3t" data-legacy="9">Revenue Affairs</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-edit="home.area3d" data-legacy="10">Land records mutation, revenue court cases, and municipal disputes.</p>
+      </div>
+      <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition border border-slate-100 group">
+        <div class="w-14 h-14 bg-blue-50 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-900 transition"><i class="fas fa-store text-blue-900 text-2xl group-hover:text-white transition"></i></div>
+        <h3 class="text-xl font-bold mb-3" data-edit="home.area4t" data-legacy="11">Consumer Cases</h3>
+        <p class="text-gray-500 text-sm leading-relaxed" data-edit="home.area4d" data-legacy="12">Deficiency in services, product liability, and consumer complaints.</p>
+      </div>
+    </div></div></div>
+</main>
+<div id="search-modal" class="fixed inset-0 bg-black/50 z-[70] hidden flex items-start justify-center p-4 pt-24" onclick="if(event.target===this)closeSearch()">
+  <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-lg max-h-[70vh] overflow-y-auto">
+    <div class="flex justify-between mb-3"><h3 id="search-title" class="font-bold text-lg text-blue-900"></h3><button onclick="closeSearch()" aria-label="Close"><i class="fas fa-times text-gray-400"></i></button></div>
+    <div id="search-results"></div></div></div>
+<script src="site.js"></script>
+</body>
+</html>

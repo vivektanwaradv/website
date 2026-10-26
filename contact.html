@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Vivek Tanwar | Advocate</title>
+<meta name="description" content="Contact Vivek Tanwar, Advocate, District Courts Complex, Bhiwani, Haryana. Phone, WhatsApp, email. Privacy policy, terms and disclaimer.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body data-page="contact" class="text-slate-800 flex flex-col min-h-screen">
+<main class="flex-grow fade-in">
+  <section class="py-20 bg-slate-50"><div class="max-w-7xl mx-auto px-4"><div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <div class="space-y-8">
+      <div><h1 class="text-4xl font-bold text-blue-900 mb-4 serif" data-edit="contact.title">Get in Touch</h1><p class="text-gray-600 text-lg" data-edit="contact.hours">Consultation hours: Mon-Sat, 10:00 AM - 6:00 PM.</p></div>
+      <div class="space-y-6">
+        <div class="flex items-start"><div class="bg-blue-900 p-4 rounded-lg mr-5 shadow-lg"><i class="fas fa-map-marker-alt text-white text-xl"></i></div><div><h4 class="font-bold text-gray-800 text-lg">Office Address</h4><p class="text-gray-600" data-edit="contact.address" data-legacy="17">New Litigation Hall,<br>District Courts Complex,<br>Bhiwani, Haryana</p></div></div>
+        <div class="flex items-start"><div class="bg-blue-900 p-4 rounded-lg mr-5 shadow-lg"><i class="fas fa-phone-alt text-white text-xl"></i></div><div><h4 class="font-bold text-gray-800 text-lg">Phone Number</h4><p class="text-gray-600" data-edit="contact.phone" data-legacy="18">+91 9671755613</p><p class="text-gray-600">WhatsApp: <a data-wa href="#" target="_blank" rel="noopener" class="text-blue-700 underline">+91 93064 56633</a></p></div></div>
+        <div class="flex items-start"><div class="bg-blue-900 p-4 rounded-lg mr-5 shadow-lg"><i class="fas fa-envelope text-white text-xl"></i></div><div><h4 class="font-bold text-gray-800 text-lg">Email Address</h4><p class="text-gray-600" data-edit="contact.email" data-legacy="19">vivektanwaradv@gmail.com</p></div></div>
+      </div></div>
+    <div class="glass-card p-8 rounded-2xl shadow-xl"><form onsubmit="sendContact(event)">
+      <div class="mb-5"><label class="block text-gray-700 text-sm font-bold mb-2">Full Name</label><input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required></div>
+      <div class="mb-5"><label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label><input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required></div>
+      <div class="mb-6"><label class="block text-gray-700 text-sm font-bold mb-2">Your Message</label><textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" rows="4" required></textarea></div>
+      <button type="submit" class="w-full bg-blue-900 text-white font-bold py-4 rounded-lg hover:bg-blue-800 transition shadow-md"><i class="fab fa-whatsapp mr-2"></i>Send via WhatsApp</button>
+    </form></div>
+  </div></div></section>
+  <section id="privacy" class="py-12 bg-white border-t scroll-mt-20"><div class="max-w-3xl mx-auto px-4 blog-content text-gray-700"><h2 class="serif" data-edit="legal.privacy.title">Privacy Policy</h2><p class="text-sm text-gray-400">Last updated: 25 October 2026</p><div data-edit="legal.privacy.body"><p>This website is operated by Vivek Tanwar, Advocate, District Courts Complex, Bhiwani, Haryana, India (“we”). This policy explains how information is handled when you visit the site.</p><h2>Information we collect</h2><p>We do not require you to register. If you contact us through the contact form or WhatsApp, we receive the details you choose to send (name, email, phone number, message). When you buy a document, payment is processed by Razorpay; we do not see or store your card or bank details.</p><h2>Cookies and advertising</h2><p>We use cookies and similar technology to remember your preferences. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this and other websites. You may opt out of personalised advertising at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>.</p><h2>How we use information</h2><p>To reply to your enquiries, deliver purchased documents, improve the website and comply with law. We do not sell your personal information.</p><h2>Your rights</h2><p>You may ask us to access, correct or delete the personal information you have sent us by writing to vivektanwaradv@gmail.com.</p></div></div></section>
+  <section id="terms" class="py-12 bg-white border-t scroll-mt-20"><div class="max-w-3xl mx-auto px-4 blog-content text-gray-700"><h2 class="serif" data-edit="legal.terms.title">Terms, Refund &amp; Cancellation</h2><p class="text-sm text-gray-400">Last updated: 25 October 2026</p><div data-edit="legal.terms.body"><h2>Use of website</h2><p>Content on this website is for general information only and is protected by copyright. You may not copy or republish it commercially without written permission.</p><h2>Digital documents</h2><p>Documents and templates are general formats. They are not a substitute for legal advice on your specific facts and must be reviewed before use. Prices are in Indian Rupees (₹).</p><h2>Refund and cancellation</h2><p>Because documents are delivered digitally and immediately, purchases are generally non-refundable. If you were charged but could not download the file, or received the wrong or a corrupted file, write to vivektanwaradv@gmail.com within 7 days with your payment reference and we will resolve it or refund you.</p><h2>Limitation of liability</h2><p>We are not liable for any loss arising from reliance on the website content or documents.</p><h2>Governing law</h2><p>These terms are governed by the laws of India; courts at Bhiwani, Haryana have jurisdiction.</p></div></div></section>
+  <section id="disclaimer" class="py-12 bg-white border-t scroll-mt-20"><div class="max-w-3xl mx-auto px-4 blog-content text-gray-700"><h2 class="serif" data-edit="legal.disclaimer.title">Disclaimer</h2><p class="text-sm text-gray-400">Last updated: 25 October 2026</p><div data-edit="legal.disclaimer.body"><p>As per the rules of the Bar Council of India, advocates are not permitted to solicit work or advertise. This website is meant only to provide information about Vivek Tanwar, Advocate. By using it you acknowledge that you are seeking this information of your own accord and that there has been no advertisement, solicitation, invitation or inducement of any kind from us.</p><p>Nothing on this website is legal advice or creates an advocate–client relationship. Content may not reflect the latest changes in law. Please consult a qualified advocate before acting on any information here. We are not responsible for the content of external links or advertisements shown by third parties.</p></div></div></section>
+</main>
+<script src="site.js"></script>
+</body>
+</html>
