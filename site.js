@@ -3,9 +3,13 @@ const CONFIG = {
     WA: '919306456633', RZP_KEY: '', ADS_CLIENT: '', ADS_SLOT: '',
     ADMIN_EMAIL: 'vivektanwaradv@gmail.com',
     FIREBASE: {
-        apiKey: "AIzaSyBaVbANNSRLr376IiTZ46MfoZihdbn6tro", authDomain: "website-vivek.firebaseapp.com",
-        projectId: "website-vivek", storageBucket: "website-vivek.firebasestorage.app",
-        messagingSenderId: "989462065688", appId: "1:989462065688:web:428e988cc35a4a7a22896d", measurementId: "G-93NJ5H9HYF"
+        apiKey: "AIzaSyBaVbANNSRLr376IiTZ46MfoZihdbn6tro", 
+        authDomain: "website-vivek.firebaseapp.com",
+        projectId: "website-vivek", 
+        storageBucket: "website-vivek.appspot.com", // Corrected storage bucket format
+        messagingSenderId: "989462065688", 
+        appId: "1:989462065688:web:428e988cc35a4a7a22896d", 
+        measurementId: "G-93NJ5H9HYF"
     }
 };
 const $ = id => document.getElementById(id), Q = s => document.querySelectorAll(s);
@@ -15,6 +19,8 @@ const HERO = 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=
 const wa = t => 'https://wa.me/' + CONFIG.WA + '?text=' + encodeURIComponent(t);
 const PAGE = document.body.dataset.page, EDIT = /[?&]edit=1/.test(location.search);
 let DB = { photo: '', hero: '', texts: {}, blogs: [], docs: [], team: [], teamSeeded: false, teamLoaded: false, blogsLoaded: false }, isAdmin = false, textsApplied = false;
+
+// Initialize Firebase
 firebase.initializeApp(CONFIG.FIREBASE);
 const fdb = firebase.firestore(), auth = firebase.auth();
 
@@ -97,7 +103,7 @@ if (CONFIG.ADS_CLIENT) { const s = document.createElement('script'); s.async = t
 
 // ================= EDITABLE TEXT =================
 function applyTexts() {
-    if (EDIT && textsApplied) return;   // never overwrite while the admin is typing
+    if (EDIT && textsApplied) return;
     Q('[data-edit]').forEach(el => { const k = el.dataset.edit; let v = DB.texts[k]; if (v == null && el.dataset.legacy != null) v = DB.texts[el.dataset.legacy]; if (v != null) el.innerHTML = clean(v); });
     textsApplied = true;
 }
